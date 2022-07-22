@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6b20b1c14d.js" crossorigin="anonymous"></script>
+	<style>
+		#noContacts{
+			padding: 10px;
+			color: white;
+			font-size: large;
+		}
+	</style>
+	<title>Contact Form</title>
+</head>
+<body>
+
+	<div class="container">
+		<!--  SEARCH FORM -->
+		<header class="header">
+			
+			<form class="search-bar">
+				<input type="search-name" class="contact-search" name="search-area" placeholder="Search">
+			</form>
+
+			<!--  ADD-CONTACT BUTTON/ICON -->
+			<a href="{% url 'create' %}"><i class="fas fa-plus-circle add">&plus;</i></a>
+		</header>
+
+		<!--  CONTACT LIST -->
+		<section class="contacts-library">
+			<ul class="contacts-list">
+				{% for contact in contacts %}
+				<a href="{% url 'profile' contact.id %}">
+					<div class="contact-section">
+						<li class="list__item">
+							<p class="contact-name">{{contact.fullname}}</p>
+							<p class="relationship">{{contact.relationship}}</p>
+						</li>
+
+						<li class="list__item">
+							<i class="fas fa-phone"></i>
+							<i class="fas fa-sms text"></i>
+						</li>
+					</div>
+				</a>
+
+				<hr>
+				{% empty %}
+				<p id='noContacts'>There are no contacts at the moment...</p>
+				{% endfor %}
+			</ul>
+		</section>
+	</div>
+
+</body>
+</html>
